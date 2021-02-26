@@ -1,0 +1,31 @@
+<h2>Input your worksheet text</h2>
+<div>
+  <p>Surround words with ( ) to be redacted.</p>
+  <p>For example "They (walked) a dog."</p>
+  <p>Becomes...</p>
+  <p>"They ______ a dog."</p>
+</div>
+
+<form action="/worksheets" method='post'>
+  <dl>
+    <dt>
+      <label for="worksheet_name">Name of worksheet</label>
+    </dt>
+    <dd>
+      <input name="worksheet_name" type="text" value="<%= params[:worksheet_name] %>">
+    </dd>
+  </dl>
+  <dl>
+    <dt>
+      <label for="text_block">Enter your text</label>
+    </dt>
+    <dd>
+      <textarea name="text_block" type="text" value="<%= params[:text_block] %>"><%= params[:text_block] %></textarea>
+    </dd>
+  </dl>
+  <fieldset class="actions">
+    <input type="submit" value="Save">
+    <a href='/worksheets'>Back</a>
+  </fieldset>
+</form>
+

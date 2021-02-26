@@ -1,0 +1,11 @@
+<a href="/worksheets/new">Create New Worksheet</a>
+
+<ul>
+  <% @worksheets.each do |worksheet| %>
+    <li>
+      <a href="/worksheets/<%= worksheet[:id] %>">
+        <h2><%= worksheet[:worksheet_name] %></h2>
+      </a>
+    </li>
+  <% end %>
+</ul>

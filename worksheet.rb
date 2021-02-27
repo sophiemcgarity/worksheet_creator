@@ -12,16 +12,15 @@ configure do
 end
 
 helpers do
-  def find_words_to_replace(text_block)
-    words_to_redact = text_block.split(' ').each_with_object([]) do |word, array| 
-      array << word if word.match?(/\[.*?\]/)
+  def redact_selected_words(text_block)
+    redacted_words = text_block.split(' ').each_with_object([]) do |word, array|
+      if word.match?(/\[.*?\]/)
+        array << "_ " * (word.length - 2)
+      else
+        array << word
+      end
     end
-  end
-
-  def replace_words_with_blanks(text_block, words_to_redact)
-    # add in word number of spaces -2 to account for []
-    # iterate over the text block
-    # iterate over the words to redact
+    redacted_words.join(' ')
   end
 end
 
@@ -43,10 +42,17 @@ def error_for_worksheet_name(worksheet_name)
   end
 end
 
-# create error to check for one period
+# Create error when less than one period.
 def error_for_worksheet_body(text_block)
   if text_block.count(".") < 1
     "Worksheet must contain at least one sentence that ends with a period ('.')."
+  end
+end
+
+# Create error when there is no word selected to redact.
+def error_for_no_redact_selection(text_block)
+  if !text_block.match?(/\[.*?\]/)
+    "At least one word must be selected to redact. (Use [ ] around the word to redact). "
   end
 end
 
@@ -81,6 +87,7 @@ post "/worksheets" do
   
   name_error = error_for_worksheet_name(worksheet_name)
   text_block_error = error_for_worksheet_body(text_block)
+  redact_selection_error = error_for_no_redact_selection(text_block)
 
   if name_error
     session[:error] = name_error
@@ -88,9 +95,11 @@ post "/worksheets" do
   elsif text_block_error
     session[:error] = text_block_error
     erb :new_worksheet, layout: :layout
+  elsif redact_selection_error
+    session[:error] = redact_selection_error
+    erb :new_worksheet, layout: :layout
   else
-    words_to_redact = find_words_to_replace(text_block)
-    redacted_text_block = replace_words_with_blanks(text_block, words_to_redact)
+    redacted_text_block = redact_selected_words(text_block)
     id = next_element_id(session[:worksheets])
     session[:worksheets] << { id: id, worksheet_name: worksheet_name, text_block: redacted_text_block }
     session[:success] = "Worksheet created."

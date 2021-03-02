@@ -15,4 +15,5 @@ Inspired by the current work from home climate. The user can define multiple wor
 
 
 ## Hosted Link
-[Hosted with Heroku](https://enigmatic-atoll-59705.herokuapp.com/worksheetsHosted with Heroku)
+[Hosted with Heroku](https://enigmatic-atoll-59705.herokuapp.com/worksheets)
+

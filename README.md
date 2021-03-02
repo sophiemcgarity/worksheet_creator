@@ -1,7 +1,6 @@
 # Worksheet Creator
 
-Worksheet Creator is a Ruby project for creating "fill-in-the-blank" worksheets.
-Inspired by the current work from home climate. The user can define multiple words to redact from a text passage. Each worksheet is stored on a home page.
+An ongoing independent project. Worksheet Creator is a Ruby project for creating "fill-in-the-blank" worksheets. Inspired by the current work from home climate. The user can define multiple words to redact from a text passage. Each worksheet is stored on the home page once created.
 
 ## Project Features
 - User can insert a block of text and choose which words to redact. Words they wish to redact should be select with `[ ]`.

@@ -1,6 +1,6 @@
 # Worksheet Creator
 
-Worksheet Creator is a Ruby for creating "fill-in-the-blank" worksheets.
+Worksheet Creator is a Ruby project for creating "fill-in-the-blank" worksheets.
 Inspired by the current work from home climate. The user can define multiple words to redact from a text passage. Each worksheet is stored on a home page.
 
 ## Project Features
